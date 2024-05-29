@@ -1,0 +1,253 @@
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, Modal, StyleSheet, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
+import { BarChart, LineChart } from 'react-native-chart-kit';
+import axios from 'axios';
+import { fetchAllData } from '../utils/widgetAPI';
+import clou from '../assets/cloudy.png';
+import img1 from '../assets/download.png';
+import img2 from '../assets/download.png';
+import img3 from '../assets/download.png';
+
+const screenWidth = Dimensions.get('window').width;
+
+export default function RainfallWidget({ selectedOption }) {
+    const [data, setData] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
+
+    useEffect(() => {
+        if (selectedOption) {
+            fetchAllData(selectedOption.id)
+                .then(data => setData(data))
+                .catch(error => console.error('Error fetching station data:', error));
+        }
+    }, [selectedOption]);
+
+    if (!data) {
+        return <Text>Loading...</Text>;
+    }
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.header}>
+                <View style={styles.infoBox}>
+                    <Image source={clou} style={styles.icon} />
+                    <Text style={styles.temperature}>{data.data.temperature}°C</Text>
+                </View>
+                <View style={styles.stationInfo}>
+                    <Text style={styles.stationName}>{data.station.name}</Text>
+                </View>
+                <View style={styles.infoBox}>
+                    <Text style={styles.humidity}>{data.data.humidity}</Text>
+                    <Text style={styles.pressure}>{data.data.pressure}</Text>
+                </View>
+            </View>
+            <ScrollView horizontal>
+                <View style={styles.chartContainer}>
+                    <RainfallBarChart />
+                </View>
+            </ScrollView>
+            <View style={styles.chartContainer}>
+                <DailyPredictionChart />
+            </View>
+            <TouchableOpacity 
+                style={styles.button}
+                onPress={() => setModalOpen(true)}
+            >
+                <Text style={styles.buttonText}>View Past Rainfall</Text>
+            </TouchableOpacity>
+
+            {modalOpen && (
+                <Modal
+                    transparent={true}
+                    visible={modalOpen}
+                    onRequestClose={() => setModalOpen(false)}
+                >
+                    <View style={styles.modalOverlay}>
+                        <View style={styles.modalContent}>
+                            <TouchableOpacity 
+                                style={styles.closeButton}
+                                onPress={() => setModalOpen(false)}
+                            >
+                                <Text style={styles.closeButtonText}>&times;</Text>
+                            </TouchableOpacity>
+                            <ScrollView vertical>
+                                <Image source={img1} style={styles.modalImage} />
+                                <Image source={img2} style={styles.modalImage} />
+                                <Image source={img3} style={styles.modalImage} />
+                            </ScrollView>
+                        </View>
+                    </View>
+                </Modal>
+            )}
+        </View>
+    );
+}
+
+function RainfallBarChart() {
+    return (
+        <BarChart
+            data={{
+                labels: ["10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "1", "2", "3"],
+                datasets: [
+                    {
+                        data: [1.5, 2, 0.5, 1, 3, 2.5, 0, 3, 4.5, 5, 3, 4.5, 5, 3.5, 2.5, 3, 4, 3.5, 3, 2.5, 4, 3, 2.5, 4, 3.5, 2, 4, 3, 3.5, 4, 5]
+                    }
+                ]
+            }}
+            width={screenWidth * 2} // Adjust width to accommodate all bars
+            height={300} // Increased height for better visibility
+            yAxisLabel=""
+            yAxisSuffix="mm"
+            yAxisInterval={1} // optional, defaults to 1
+            chartConfig={{
+                backgroundColor: "#000000",
+                backgroundGradientFrom: "#1E2923",
+                backgroundGradientTo: "#08130D",
+                decimalPlaces: 2, // optional, defaults to 2dp
+                color: (opacity = 1) => `rgba(118, 167, 250, ${opacity})`,
+                labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                style: {
+                    borderRadius: 16
+                },
+                propsForDots: {
+                    r: "6",
+                    strokeWidth: "2",
+                    stroke: "#ffa726"
+                },
+                barPercentage: 0.5, // Adjusted bar percentage for better spacing
+                barRadius: 5, // Rounded bar edges for better aesthetics
+                fillShadowGradient: "#76A7FA", // Bar fill color
+                fillShadowGradientOpacity: 1,
+            }}
+            style={{
+                marginVertical: 8,
+                borderRadius: 16
+            }}
+        />
+    );
+}
+
+function DailyPredictionChart() {
+  return (
+      <LineChart
+          data={{
+              labels: ["2 Days Ago", "Yesterday", "Today", "Tomorrow  ", "D.A.Tomorrow"],
+              datasets: [
+                  {
+                      data: [1.5, 2, 2.5, 3, 2, 3.5]
+                  }
+              ]
+          }}
+          width={screenWidth - 16} // from react-native
+          height={220}
+          yAxisLabel=""
+          yAxisSuffix="mm"
+          yAxisInterval={1} // optional, defaults to 1
+          chartConfig={{
+              backgroundColor: "#000000",
+              backgroundGradientFrom: "#1E2923",
+              backgroundGradientTo: "#08130D",
+              decimalPlaces: 2, // optional, defaults to 2dp
+              color: (opacity = 1) => `rgba(118, 167, 250, ${opacity})`, // Corrected to use a function
+              labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+              style: {
+                  borderRadius: 16
+              },
+              propsForDots: {
+                  r: "6",
+                  strokeWidth: "2",
+                  stroke: "#ffa726"
+              }
+          }}
+          bezier
+          style={{
+              marginVertical: 8,
+              borderRadius: 16
+          }}
+      />
+  );
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        borderRadius: 16,
+        padding: 16,
+        margin: 8,
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginBottom: 16,
+    },
+    infoBox: {
+        alignItems: 'center',
+    },
+    icon: {
+        width: 48,
+        height: 48,
+    },
+    temperature: {
+        fontSize: 24,
+        color: '#ff4500',
+    },
+    stationInfo: {
+        justifyContent: 'center',
+    },
+    stationName: {
+        fontSize: 18,
+        color: '#ffffff',
+    },
+    humidity: {
+        fontSize: 16,
+        color: '#47a0ff',
+        marginTop: 16,
+    },
+    pressure: {
+        fontSize: 16,
+        color: '#47a0ff',
+        marginTop: 16,
+    },
+    chartContainer: {
+        marginVertical: 8,
+    },
+    button: {
+        backgroundColor: '#1E90FF',
+        padding: 12,
+        borderRadius: 8,
+        alignItems: 'center',
+        marginTop: 16,
+    },
+    buttonText: {
+        color: '#ffffff',
+        fontSize: 16,
+    },
+    modalOverlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    modalContent: {
+        backgroundColor: '#ffffff',
+        padding: 16,
+        borderRadius: 8,
+        width: '80%',
+        alignItems: 'center',
+    },
+    closeButton: {
+        position: 'absolute',
+        top: 2,
+        right: 2,
+    },
+    closeButtonText: {
+        fontSize: 24,
+        color: '#000000',
+    },
+    modalImage: {
+        width: 100,
+        height: 100,
+        margin: 0,
+    },
+});
