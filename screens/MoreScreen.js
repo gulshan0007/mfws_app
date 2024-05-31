@@ -13,6 +13,7 @@ const MoreScreen = () => {
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.paragraph}>
+            {'\n\n'}
                 Climate Studies at IIT Bombay, in collaboration with HDFC Ergo, hopes to harness the power of social media to monitor Mumbai floods by taking help from its residents and asking them to post details about floods in their neighborhoods, and collecting this data to issue real-time geographically-specific flood alerts/warnings. The gathered data shall be used to improve flood emergency response and rescue efforts, and help develop accurate flood forecasts in the future.
                 {'\n\n'}
                 Real-time information at hand can help save lives during disasters. At best, we hope to help Mumbaikars plan their monsoon days effectively. Our ultimate aim is to create a flood resilience plan for the Mumbai metropolitan region.
@@ -49,6 +50,7 @@ const MoreScreen = () => {
                 </View>
                 <Text style={styles.teamNote}>
                     Website & App developed by{'\n'}IIT Bombay students, Deepak{'\n'}Silaych & Gulshan Kumar
+                    {'\n\n'}
                 </Text>
             </View>
             <View style={styles.socialMediaIcons}>
@@ -63,8 +65,11 @@ const MoreScreen = () => {
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com/IITBclimate')}>
                     <Image source={facebookIcon} style={styles.icon} />
+                    
                 </TouchableOpacity>
+                
             </View>
+            
         </ScrollView>
     );
 };

@@ -41,12 +41,21 @@ export default function RainfallWidget({ selectedOption }) {
                     <Text style={styles.pressure}>{data.data.pressure}</Text>
                 </View>
             </View>
+            
+            <Text style={styles.chartHeading1}>Hourly Rainfall Forecast (Experimental)</Text>
             <ScrollView horizontal>
-                <View style={styles.chartContainer}>
+            <View style={styles.chartContainer}>
+                    
                     <RainfallBarChart />
+                    {/* <Text style={styles.chartHeading}>Scroll</Text> */}
                 </View>
             </ScrollView>
+            <Text style={styles.chartHeading2}>Scroll</Text>
             <View style={styles.chartContainer}>
+            
+                    <Text style={styles.chartHeading}>Daily Rainfall Forecast (Experimental)</Text>
+                
+               
                 <DailyPredictionChart />
             </View>
             <TouchableOpacity 
@@ -121,52 +130,53 @@ function RainfallBarChart() {
             }}
             style={{
                 marginVertical: 8,
-                borderRadius: 16
+                borderRadius: 16,
+                
             }}
         />
     );
 }
 
 function DailyPredictionChart() {
-  return (
-      <LineChart
-          data={{
-              labels: ["2 Days Ago", "Yesterday", "Today", "Tomorrow  ", "D.A.Tomorrow"],
-              datasets: [
-                  {
-                      data: [1.5, 2, 2.5, 3, 2, 3.5]
-                  }
-              ]
-          }}
-          width={screenWidth - 16} // from react-native
-          height={220}
-          yAxisLabel=""
-          yAxisSuffix="mm"
-          yAxisInterval={1} // optional, defaults to 1
-          chartConfig={{
-              backgroundColor: "#000000",
-              backgroundGradientFrom: "#1E2923",
-              backgroundGradientTo: "#08130D",
-              decimalPlaces: 2, // optional, defaults to 2dp
-              color: (opacity = 1) => `rgba(118, 167, 250, ${opacity})`, // Corrected to use a function
-              labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-              style: {
-                  borderRadius: 16
-              },
-              propsForDots: {
-                  r: "6",
-                  strokeWidth: "2",
-                  stroke: "#ffa726"
-              }
-          }}
-          bezier
-          style={{
-              marginVertical: 8,
-              borderRadius: 16
-          }}
-      />
-  );
+    return (
+        <BarChart
+            data={{
+                labels: ["2 Days Ago", "Yesterday", "Today", "Tomorrow  ", "D.A.Tomorrow"],
+                datasets: [
+                    {
+                        data: [1.5, 2, 2.5, 3, 2]
+                    }
+                ]
+            }}
+            width={screenWidth - 16} // from react-native
+            height={220}
+            yAxisLabel=""
+            yAxisSuffix="mm"
+            yAxisInterval={1} // optional, defaults to 1
+            chartConfig={{
+                backgroundColor: "#000000",
+                backgroundGradientFrom: "#1E2923",
+                backgroundGradientTo: "#08130D",
+                decimalPlaces: 2, // optional, defaults to 2dp
+                color: (opacity = 1) => `rgba(118, 167, 250, ${opacity})`, // Corrected to use a function
+                labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                style: {
+                    borderRadius: 16
+                },
+                propsForDots: {
+                    r: "6",
+                    strokeWidth: "2",
+                    stroke: "#ffa726"
+                }
+            }}
+            style={{
+                marginVertical: 8,
+                borderRadius: 16
+            }}
+        />
+    );
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -210,7 +220,28 @@ const styles = StyleSheet.create({
         marginTop: 16,
     },
     chartContainer: {
-        marginVertical: 8,
+        marginVertical: 0,
+    },
+    chartHeading: {
+        marginVertical: 1,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: '#ffffff', // Text color white
+        fontSize: 16, // Font size set to 16
+    },
+    chartHeading1: {
+        marginVertical: 0,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: '#ffffff', // Text color white
+        fontSize: 16, // Font size set to 16
+    },
+    chartHeading2: {
+        marginVertical: 0,
+        textAlign: 'center',
+        fontWeight: 'bold',
+        color: 'green', // Text color white
+        fontSize: 16, // Font size set to 16
     },
     button: {
         backgroundColor: '#1E90FF',

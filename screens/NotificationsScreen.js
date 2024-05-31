@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Modal, TouchableOpacity, StyleSheet, Button } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import Form from './Form';
+import FormScreen from './Form';
 
 const CrowdSourceMap = () => {
   const [markers, setMarkers] = useState([]);
@@ -43,10 +43,10 @@ const CrowdSourceMap = () => {
           <TouchableOpacity style={styles.closeButton} onPress={() => setShowForm(false)}>
             <Text style={styles.closeButtonText}>X</Text>
           </TouchableOpacity>
-          <Form />
+          <FormScreen />
         </View>
       </Modal>
-      <Button title="Fill Form" onPress={() => setShowForm(true)} />
+      
     </View>
   );
 };

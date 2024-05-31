@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const fetchStations = async () => {
     try {
-        const response = await axios.get('http://192.168.0.112:8000/widget/stations/');
+        const response = await axios.get('http://192.168.1.100:8000/widget/stations/');
         return response.data;
     } catch (error) {
         console.error('Error fetching stations:', error);
@@ -13,7 +13,7 @@ export const fetchStations = async () => {
 
 export const fetchStationData = async (stationId) => {
     try {
-        const response = await axios.get(`http://192.168.0.112:8000/widget/station/${stationId}/`);
+        const response = await axios.get(`http://192.168.1.100:8000/widget/station/${stationId}/`);
         return response.data;
     } catch (error) {
         console.error('Error fetching station data:', error);
@@ -24,7 +24,7 @@ export const fetchStationData = async (stationId) => {
 
 export const fetchRainfallData = async (stationId) => {
     try {
-        const response = await axios.get(`http://192.168.0.112:8000/widget/rainfall/${stationId}/`);
+        const response = await axios.get(`http://192.168.1.100:8000/widget/rainfall/${stationId}/`);
         return response.data;
     } catch (error) {
         console.error('Error fetching station data:', error);
@@ -34,7 +34,7 @@ export const fetchRainfallData = async (stationId) => {
 
 export const fetchAllData = async (stationId) => {
     try {
-        const response = await axios.get(`http://192.168.0.112:8000/widget/alldata/${stationId}`);
+        const response = await axios.get(`http://192.168.1.100:8000/widget/alldata/${stationId}`);
         return response.data;
     } catch (error) {
         console.error('Error fetching station data:', error);

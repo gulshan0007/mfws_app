@@ -131,7 +131,7 @@ const barChartOptions = {
       titleTextStyle: { color: "#fff" }, 
       textStyle: { color: "#fff" },
       slantedText: true,
-      slantedTextAngle: 45 
+      slantedTextAngle: 90
   },
   vAxis: { 
       title: "Rainfall (mm)",

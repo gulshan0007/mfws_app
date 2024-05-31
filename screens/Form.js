@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import axios from 'axios';
 
-const Form = () => {
+const FormScreen = () => {
   const [name, setName] = useState('');
   const [height, setHeight] = useState('');
   const [waterLevelFactor, setWaterLevelFactor] = useState(0);
@@ -42,7 +42,8 @@ const Form = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Submit Data</Text>
+      
+      <Text style={styles.title}>{'\n\n'}Report Flood in your Area!!</Text>
       <TextInput
         style={styles.input}
         placeholder="Name"
@@ -115,25 +116,33 @@ const Form = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 0,
-    paddingVertical: 0,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  input: {
-    backgroundColor: '#f0f0f0',
-    padding: 5,
-    borderRadius: 5,
     marginBottom: 10,
   },
+  input: {
+    width: '100%',
+    backgroundColor: '#a8a8a8',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    borderRadius: 5,
+    marginBottom: 15,
+    color: 'white'
+  },
   waterLevelContainer: {
-    marginBottom: 5,
+    marginBottom: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   waterLevelText: {
-    marginBottom: 5,
+    fontSize: 18,
+    marginBottom: 10,
   },
   waterLevelOptions: {
     flexDirection: 'row',
@@ -147,10 +156,11 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: 'blue',
-    padding: 15,
+    paddingVertical: 15,
+    paddingHorizontal: 30,
     borderRadius: 5,
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 5,
   },
   buttonText: {
     color: 'white',
@@ -167,4 +177,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Form;
+export default FormScreen;
