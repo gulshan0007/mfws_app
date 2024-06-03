@@ -28,7 +28,7 @@ const FormScreen = () => {
 
     // Send data to server
     try {
-      const response = await axios.post('http://192.168.1.100:8000/crowdsource/data/', data);
+      const response = await axios.post('http://192.168.0.114:8000/crowdsource/data/', data);
       setMessage(response.data.message);
     } catch (error) {
       console.error('Error storing data:', error);
@@ -44,15 +44,10 @@ const FormScreen = () => {
     <View style={styles.container}>
       
       <Text style={styles.title}>{'\n\n'}Report Flood in your Area!!</Text>
+      
       <TextInput
         style={styles.input}
-        placeholder="Name"
-        value={name}
-        onChangeText={setName}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Your Height (cm)"
+        placeholder="Your Height (in Feet)"
         value={height}
         onChangeText={setHeight}
         keyboardType="numeric"
@@ -67,34 +62,35 @@ const FormScreen = () => {
       onPress={() => handleOption(0.4)}
     >
       <Image source={require('../assets/crowdsource/1.png')} style={styles.image} />
-      <Text>Low</Text>
+      <Text>Low (Ankle)</Text>
     </TouchableOpacity>
-
-    <TouchableOpacity
-      style={[styles.option, waterLevelFactor === 0.4 && styles.activeOption]}
-      onPress={() => handleOption(0.6)}
-    >
-      <Image source={require('../assets/crowdsource/2.png')} style={styles.image} />
-      <Text>Medium</Text>
-    </TouchableOpacity>
-  </View>
-
-  {/* Second pair */}
-  <View style={styles.optionPair}>
     <TouchableOpacity
       style={[styles.option, waterLevelFactor === 0.6 && styles.activeOption]}
       onPress={() => handleOption(0.9)}
     >
       <Image source={require('../assets/crowdsource/3.png')} style={styles.image} />
-      <Text>Very High</Text>
+      <Text>High (Waist) </Text>
     </TouchableOpacity>
 
+   
+  </View>
+
+  {/* Second pair */}
+  <View style={styles.optionPair}>
+    
+  <TouchableOpacity
+      style={[styles.option, waterLevelFactor === 0.4 && styles.activeOption]}
+      onPress={() => handleOption(0.6)}
+    >
+      <Image source={require('../assets/crowdsource/2.png')} style={styles.image} />
+      <Text>Medium (Knee) </Text>
+    </TouchableOpacity>
     <TouchableOpacity
       style={[styles.option, waterLevelFactor === 0.9 && styles.activeOption]}
       onPress={() => handleOption(0.9)}
     >
       <Image source={require('../assets/crowdsource/4.png')} style={styles.image} />
-      <Text>Very High</Text>
+      <Text>Very High (Shoulder) </Text>
     </TouchableOpacity>
   </View>
 </View>

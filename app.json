@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "expo_app",
-    "slug": "expo_app",
+    "name": "MFWS",
+    "slug": "MFWS",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ffffff"  
     },
     "assetBundlePatterns": [
       "**/*"
@@ -17,17 +17,28 @@
     "ios": {
       "supportsTablet": true
     },
+    "platforms": ["ios", "android"],
     "android": {
+      "permissions": ["ACCESS_FINE_LOCATION"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.gulshan0007.MFWS"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "eae6442f-3cdf-45e9-8c9a-9767f33d708b"
+      }
+    }
   }
 }

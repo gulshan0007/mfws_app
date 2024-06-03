@@ -98,7 +98,7 @@ const CustomTabBar = ({ state, descriptors, navigation }) => {
       <TouchableOpacity onPress={handlePress} style={styles.buttonContainer}>
         <Animated.View style={[styles.button, { transform: [{ scale: buttonSize }] }]}>
           <Animated.Text style={[styles.buttonText, { opacity: blinkAnimation }]}>
-            Report Flood
+            Click to Report Flood in Your Area
           </Animated.Text>
           <Ionicons name="add-circle" size={32} color="white" />
         </Animated.View>
@@ -131,15 +131,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 180,
+    width: 320,
     height: 60,
     borderRadius: 30,
     backgroundColor: 'tomato',
-    marginLeft: 5
+    marginLeft: 5,
+    padding: '50px',
   },
   buttonText: {
     color: 'white',
-    marginRight: 5,
+    
+    padding: '50px',
+    fontWeight: 'bold',
+    marginLeft: 5,
   },
   label: {
     fontSize: 8, // Adjustthe font size as needed
