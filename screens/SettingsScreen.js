@@ -34,45 +34,48 @@ export default function WaterlevelMap() {
   };
 
   return (
-    <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: 19.0760,
-          longitude: 72.8777,
-          latitudeDelta: 0.3,
-          longitudeDelta: 0.3,
-        }}
-      >
-        {dummyMarkers.map((dummyMarker, index) => (
-          <Marker
-            key={`dummy-${index}`}
-            coordinate={{
-              latitude: dummyMarker.position[0],
-              longitude: dummyMarker.position[1]
-            }}
-            onPress={() => handleMarkerPress(dummyMarker)}
-          >
-            <Callout>
-              <Text>{dummyMarker.name}</Text>
-            </Callout>
-          </Marker>
-        ))}
-      </MapView>
+    // <View style={styles.container}>
+    //   <MapView
+    //     style={styles.map}
+    //     initialRegion={{
+    //       latitude: 19.0760,
+    //       longitude: 72.8777,
+    //       latitudeDelta: 0.3,
+    //       longitudeDelta: 0.3,
+    //     }}
+    //   >
+    //     {dummyMarkers.map((dummyMarker, index) => (
+    //       <Marker
+    //         key={`dummy-${index}`}
+    //         coordinate={{
+    //           latitude: dummyMarker.position[0],
+    //           longitude: dummyMarker.position[1]
+    //         }}
+    //         onPress={() => handleMarkerPress(dummyMarker)}
+    //       >
+    //         <Callout>
+    //           <Text>{dummyMarker.name}</Text>
+    //         </Callout>
+    //       </Marker>
+    //     ))}
+    //   </MapView>
 
-      <Modal
-        visible={modalVisible}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={closeModal}
-      >
-        <View style={styles.modalContainer}>
-          <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
-            <Text style={styles.closeButtonText}>X</Text>
-          </TouchableOpacity>
-          {selectedMarker && <WaterlevelWidget selectedOption={selectedMarker} />}
-        </View>
-      </Modal>
+    //   <Modal
+    //     visible={modalVisible}
+    //     animationType="slide"
+    //     transparent={true}
+    //     onRequestClose={closeModal}
+    //   >
+    //     <View style={styles.modalContainer}>
+    //       <TouchableOpacity style={styles.closeButton} onPress={closeModal}>
+    //         <Text style={styles.closeButtonText}>X</Text>
+    //       </TouchableOpacity>
+    //       {selectedMarker && <WaterlevelWidget selectedOption={selectedMarker} />}
+    //     </View>
+    //   </Modal>
+    // </View>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Profile!</Text>
     </View>
   );
 }

@@ -2,14 +2,19 @@
   "name": "expo_app",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
+  "overrides": {
+    "@expo/config-plugins": "^8.0.0",
+    "@expo/prebuild-config": "~7.0.0"
+  },
   "scripts": {
     "start": "expo start",
+    "build:android": "build",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
   "dependencies": {
-    "@expo/config-plugins": "~8.0.0",
+    "@expo/config-plugins": "^8.0.0",
     "@expo/prebuild-config": "~7.0.0",
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.17",
@@ -22,6 +27,7 @@
     "expo-router": "~3.5.14",
     "expo-status-bar": "~1.12.1",
     "expo-updates": "~0.25.15",
+    "graphql": "^16.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-leaflet": "^4.2.1",
@@ -34,7 +40,10 @@
     "react-native-screens": "3.31.1",
     "react-native-svg": "15.2.0",
     "react-native-vector-icons": "^10.1.0",
-    "react-native-webview": "13.8.6"
+    "react-native-webview": "13.8.6",
+    "semver": "^7.6.2",
+    "tar": "^7.2.0",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0"

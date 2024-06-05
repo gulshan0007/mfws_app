@@ -28,7 +28,7 @@ const FormScreen = () => {
 
     // Send data to server
     try {
-      const response = await axios.post('http://192.168.0.114:8000/crowdsource/data/', data);
+      const response = await axios.post('http://192.168.0.100:8000/crowdsource/data/', data);
       setMessage(response.data.message);
     } catch (error) {
       console.error('Error storing data:', error);
